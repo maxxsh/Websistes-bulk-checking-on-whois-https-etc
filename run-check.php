@@ -14,13 +14,10 @@ function GetWhoisInfo($whoisserver, $domain)
     stream_set_blocking($fp, true);
     fputs($fp, $domain . "\r\n");
     $out = "";
-
     while (!feof($fp)) {
       $out .= fgets($fp);
     }
-
     fclose($fp);
-
     return $out;
   }
 }
@@ -63,7 +60,6 @@ function QueryWhoisServer($whoisserver, $domain)
 {
   //query to $whoisserver whois to get registrar whois server address only
   $rws = GetRegistrarWhoisServer($whoisserver, $domain);
-
   //query to registrar whois server (registrar whois servers are returning contact infos)
   $out = GetWhoisInfo($rws, $domain);
   if (!is_array($out)) {
